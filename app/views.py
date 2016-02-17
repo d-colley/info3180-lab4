@@ -41,7 +41,8 @@ def home():
     return render_template('home.html')
     
 @app.route('/filelisting/')
-def file_list(data=iteration(os.path.expanduser(u'~/workspace/Exercise/info3180-lab4/app/static/uploads'))):
+
+def file_list(data=iteration(os.path.expanduser(u'~'))):
     """Render the website's about page."""
     return render_template('listing.html', data=data)
 
