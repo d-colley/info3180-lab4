@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+  body{
+    padding-top: 50px;
+    background-color: #eee !important;
+  }
+  
+</style>
+{% endblock %}
+
+{% block main %}
+
+<h1>{{ data.name }} folder</h1>
+<ul>
+  {%- for item in data.children recursive %}
+      <li>
+        {{ item.name }}
+        {%- if item.children -%}
+          <ul>{{ loop(item.children) }}</ul>
+        {%- endif %}
+      </li>
+  {%- endfor %}
+</ul>
+    
+
+
+{% endblock %}

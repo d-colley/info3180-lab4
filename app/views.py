@@ -19,14 +19,19 @@ app.config.from_object(__name__)
 # Routing for your application.
 ###
 
-app.route('/filelisting')
-def iteration():
-    """iterates over contents in folder"""
-    rootdir = "static/uploads"
-    print rootdir
-    for subdir, dirs, files in os.walk(rootdir)
-        for file in files:
-            print os.path.join(subdir, file)
+def iteration(path):
+    tree = dict(name=os.path.basename(path), children=[])
+    try: lst = os.listdir(path)
+    except OSError:
+        pass #ignore errors
+    else:
+        for name in lst:
+            fn = os.path.join(path, name)
+            if os.path.isdir(fn):
+                tree['children'].append(iteration(fn))
+            else:
+               tree['children'].append(dict(name=name))
+    return tree
 
 
 
@@ -34,6 +39,11 @@ def iteration():
 def home():
     """Render website's home page."""
     return render_template('home.html')
+    
+@app.route('/filelisting/')
+def file_list(data=iteration(os.path.expanduser(u'~/workspace/Exercise/info3180-lab4/app/static/uploads'))):
+    """Render the website's about page."""
+    return render_template('listing.html', data=data)
 
 
 @app.route('/about/')
