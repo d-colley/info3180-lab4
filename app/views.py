@@ -42,7 +42,7 @@ def home():
     
 @app.route('/filelisting/')
 
-def file_list(data=iteration(os.path.expanduser(u'~/app/'))):
+def file_list(data=iteration(os.path.expanduser(u'~/app/static/uploads'))):
     """Render the website's about page."""
     return render_template('listing.html', data=data)
 
