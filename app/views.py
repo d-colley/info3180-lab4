@@ -19,6 +19,17 @@ app.config.from_object(__name__)
 # Routing for your application.
 ###
 
+app.route('/filelisting')
+def iteration():
+    """iterates over contents in folder"""
+    rootdir = "static/uploads"
+    print rootdir
+    for subdir, dirs, files in os.walk(rootdir)
+        for file in files:
+            print os.path.join(subdir, file)
+
+
+
 @app.route('/')
 def home():
     """Render website's home page."""
