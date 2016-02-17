@@ -41,7 +41,7 @@ def home():
     return render_template('home.html')
     
 @app.route('/filelisting/')
-
+# "os.path.expanduser(u'~/app/static/uploads')" -path to heroku uploads folder
 def file_list(data=iteration(os.path.expanduser(u'~/app/static/uploads'))):
     """Render the website's about page."""
     return render_template('listing.html', data=data)
